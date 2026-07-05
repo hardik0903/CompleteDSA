@@ -153,6 +153,19 @@ python auto_commit.py
 
 ---
 
+## 🔗 Connect & Profiles
+
+<div align="center">
+
+[![Codolio](https://img.shields.io/badge/Codolio-hardikpandey-1a1a2e?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6Ii8+PC9zdmc+&logoColor=white)](https://codolio.com/profile/hardikpandey)
+[![GeeksforGeeks](https://img.shields.io/badge/GeeksforGeeks-hardikpanbh1l-2F8D46?style=for-the-badge&logo=geeksforgeeks&logoColor=white)](https://www.geeksforgeeks.org/profile/hardikpanbh1l)
+[![Coding Ninjas](https://img.shields.io/badge/Coding%20Ninjas-Profile-DD6620?style=for-the-badge&logo=codingninjas&logoColor=white)](https://www.naukri.com/code360/profile/638cfc5b-a12f-4016-a000-b0c8765163b1)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Hardik%20Pandey-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hardik-pandey-profile/)
+
+</div>
+
+---
+
 <div align="center">
 
 **Built with discipline. Updated with every build.**
