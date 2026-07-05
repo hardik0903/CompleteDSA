@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+  public:
+    int minSteps(vector<int>& arr, int start, int end) {
+        // code here
+        queue<pair<int, int>> q;
+        q.push({start, 0});
+        vector<int> dist(1000, 1e9);
+        dist[start]=0;
+        int mod = 1000;
+        
+        while(!q.empty()){
+            int node = q.front().first;
+            int steps = q.front().second;
+            q.pop();
+            
+            for(auto it:arr){
+                int num = (node*it)%mod;
+                if(steps+1 < dist[num]){
+                    dist[num]=steps+1;
+                    if(num==end) return steps+1;
+                    q.push({num, steps+1});
+                }
+            }
+        }
+        return -1;
+    }
+};
+
+int main(){
+
+    int start, end;
+
+    cout<<"Enter start and end: ";
+    cin>>start>>end;
+
+    int n;
+    cout<<"Enter array size: ";
+    cin>>n;
+    vector<int> arr(n);
+    cout<<"Enter array elements: ";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i]; // Read each element
+    }
+
+    Solution sol;
+    int answer = sol.minSteps(arr, start, end);
+    cout<<"Number of multiplication to reach the end: "<<answer;
+}
