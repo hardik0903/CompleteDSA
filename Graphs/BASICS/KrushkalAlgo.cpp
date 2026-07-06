@@ -10,7 +10,7 @@ public:
         size.resize(n+1, 1);
         rank.resize(n+1, 0);
 
-        for(int i=0;i<n;i++){
+        for(int i=0;i<=n;i++){
             parent[i]=i;
         }
     }
@@ -68,14 +68,13 @@ public:
         for(auto it:edges){
             adj.push_back({it[0], {it[1], it[2]}});
         }
-
+        DisjointSet ds(V);
         sort(adj.begin(), adj.end());
         int mstW=0;
         for(auto it:adj){
             int wt = it.first;
             int u = it.second.first;
             int v = it.second.second;
-            DisjointSet ds(V);
             if(ds.findUParent(u)!=ds.findUParent(v)){
                 mstW+=wt;
                 ds.unionByRank(u, v);
@@ -91,7 +90,7 @@ int main(){
     cin>>V>>E;
 
     Solution sol;
-    vector<vector<int>> edges(E);
+    vector<vector<int>> edges;
     for(int i=0;i<E;i++){
         int wt, u, v;
         cout<<"Enter weight and connection of edges: ";
