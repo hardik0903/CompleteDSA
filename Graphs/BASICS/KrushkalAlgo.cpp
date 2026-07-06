@@ -95,6 +95,7 @@ int main(){
     for(int i=0;i<E;i++){
         int wt, u, v;
         cout<<"Enter weight and connection of edges: ";
+        cin>>wt>>u>>v;
         edges.push_back({wt, u, v});
     }
 
