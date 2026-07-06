@@ -12,7 +12,7 @@ public:
         }
         
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        vector<int> vis(V, 0);
+        vector<int> vis(V+1, 0);
         
         pq.push({0, 1});
         int sum=0;
