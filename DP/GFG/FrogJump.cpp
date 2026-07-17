@@ -42,22 +42,41 @@ public:
     // }
 
     //!TABULATION APPROACH
+    // int frogJump(vector<int>& heights){
+    //     int n=heights.size();
+
+    //     vector<int> dp(n, 0);
+    //     dp[0]=0;
+    //     for(int i=1;i<n;i++){
+    //         int fs = dp[i-1] + abs(heights[i] - heights[i-1]);
+    //         int rs=INT_MAX;
+
+    //         if(i>1){
+    //             rs = dp[i-2] + abs(heights[i-2] - heights[i]); 
+    //         }
+
+    //         dp[i] = min(fs, rs);
+    //     }
+    //     return dp[n-1];
+    // }
+
+    //!SPACE OPTIMIZATION
     int frogJump(vector<int>& heights){
         int n=heights.size();
 
-        vector<int> dp(n, 0);
-        dp[0]=0;
+        int prev=0;
+        int prev2=0;
         for(int i=1;i<n;i++){
-            int fs = dp[i-1] + abs(heights[i] - heights[i-1]);
-            int rs=INT_MAX;
-
+            int left = prev + abs(heights[i] - heights[i-1]);
+            int right=INT_MAX;
             if(i>1){
-                rs = dp[i-2] + abs(heights[i-2] - heights[i]); 
+                right = prev2 + abs(heights[i] - heights[i-2]);
             }
-
-            dp[i] = min(fs, rs);
+            int curri=min(left, right);
+            prev2=prev;
+            prev=curri;
         }
-        return dp[n-1];
+        return prev;
     }
 };
 
