@@ -44,7 +44,7 @@ public:
 
     //!TABULATION
     int f(int n, vector<int>& nums, vector<int>& dp){
-        dp[0]=0;
+        dp[0]=nums[0];
 
         for(int i=1;i<=n;i++){
 
