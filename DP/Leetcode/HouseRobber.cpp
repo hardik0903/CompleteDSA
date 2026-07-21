@@ -3,21 +3,43 @@ using namespace std;
 
 class Solution{
 public:
-    int f(int n, vector<int>& nums){
-        if(n==0) return nums[0];
+
+    //! RECURSION
+    // int f(int n, vector<int>& nums){
+    //     if(n==0) return nums[0];
+    //     if(n<0) return 0;
+
+    //     int pick = nums[n] + f(n-2, nums);
+    //     int notpick = 0 + f(n-1, nums);
+
+    //     return max(pick, notpick);
+
+    // }
+
+    // int rob(vector<int>& nums){
+    //     int n =nums.size();
+
+    //     return f(n-1, nums);
+    // }
+
+    //!MEMOIZATION
+    int f(int n, vector<int>& dp, vector<int>& nums){
+
+        if(n==0) return nums[n];
         if(n<0) return 0;
 
-        int pick = nums[n] + f(n-2, nums);
-        int notpick = 0 + f(n-1, nums);
+        if(dp[n]!=-1) return dp[n];
 
-        return max(pick, notpick);
+        int pick = nums[n] + f(n-2, dp, nums);
+        int notpick = 0 + f(n-1, dp, nums);
 
+        return dp[n] = max(pick, notpick);
     }
 
     int rob(vector<int>& nums){
-        int n =nums.size();
-
-        return f(n-1, nums);
+        int n=nums.size()-1;
+        vector<int> dp(n);
+        return f(n-1, dp, nums);
     }
 };
 
