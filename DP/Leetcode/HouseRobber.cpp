@@ -48,9 +48,8 @@ public:
 
         for(int i=1;i<=n;i++){
 
-            int pick = nums[i] + (i-2<0)?0:nums[i-2];
-            int notpick = 0 + nums[i-1];
-
+            int pick = nums[i] + (i-2<0)?0:dp[i-2];
+            int notpick = 0 + dp[i-1];
             dp[i] = max(pick, notpick);
         }
 
