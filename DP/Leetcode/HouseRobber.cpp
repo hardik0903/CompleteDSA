@@ -23,23 +23,44 @@ public:
     // }
 
     //!MEMOIZATION
-    int f(int n, vector<int>& dp, vector<int>& nums){
+    // int f(int n, vector<int>& dp, vector<int>& nums){
 
-        if(n==0) return nums[n];
-        if(n<0) return 0;
+    //     if(n==0) return nums[n];
+    //     if(n<0) return 0;
 
-        if(dp[n]!=-1) return dp[n];
+    //     if(dp[n]!=-1) return dp[n];
 
-        int pick = nums[n] + f(n-2, dp, nums);
-        int notpick = 0 + f(n-1, dp, nums);
+    //     int pick = nums[n] + f(n-2, dp, nums);
+    //     int notpick = 0 + f(n-1, dp, nums);
 
-        return dp[n] = max(pick, notpick);
+    //     return dp[n] = max(pick, notpick);
+    // }
+
+    // int rob(vector<int>& nums){
+    //     int n=nums.size();
+    //     vector<int> dp(n, -1);
+    //     return f(n-1, dp, nums);
+    // }
+
+    //!TABULATION
+    int f(int n, vector<int>& nums, vector<int>& dp){
+        dp[0]=0;
+
+        for(int i=1;i<n;i++){
+
+            int pick = nums[i] + (i-2<0)?0:nums[i-2];
+            int notpick = 0 + nums[i-1];
+
+            dp[i] = max(pick, notpick);
+        }
+
+        return dp[n];
     }
 
     int rob(vector<int>& nums){
-        int n=nums.size();
-        vector<int> dp(n, -1);
-        return f(n-1, dp, nums);
+        int n = nums.size();
+        vector<int> dp(n, 0);
+        return f(n-1, nums, dp);
     }
 };
 
