@@ -26,7 +26,7 @@ int main(){
     Solution sol;
     int number;
     cin>>number;
-    vector<int> dp(number, -1);
+    vector<int> dp(number+1, -1);
     int ans = sol.fibonacci(number, dp);
     cout<<ans;
 
