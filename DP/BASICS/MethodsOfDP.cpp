@@ -13,12 +13,22 @@ public:
     // }
 
     //!FIRST DP APPROACH: MEMOIZATION
-    int fibonacci(int n, vector<int>& dp){
-        if(n<=1) return n;
+    // int fibonacci(int n, vector<int>& dp){
+    //     if(n<=1) return n;
 
-        if(dp[n]!=-1) return dp[n];
+    //     if(dp[n]!=-1) return dp[n];
 
-        return dp[n]=fibonacci(n-1, dp)+fibonacci(n-2, dp);
+    //     return dp[n]=fibonacci(n-1, dp)+fibonacci(n-2, dp);
+    // }
+
+    int fibonacci(int number, vector<int>& dp){
+        dp[0]=0;
+        dp[1]=0;
+
+        for(int i=2;i<number;i++){
+            dp[i] = dp[i-1]+dp[i-2];
+        }
+        return dp[number];
     }
 };
 
