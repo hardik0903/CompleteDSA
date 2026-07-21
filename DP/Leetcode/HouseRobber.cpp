@@ -46,7 +46,7 @@ public:
     int f(int n, vector<int>& nums, vector<int>& dp){
         dp[0]=0;
 
-        for(int i=1;i<n;i++){
+        for(int i=1;i<=n;i++){
 
             int pick = nums[i] + (i-2<0)?0:nums[i-2];
             int notpick = 0 + nums[i-1];
