@@ -43,24 +43,39 @@ public:
     // }
 
     //!TABULATION
-    int f(int n, vector<int>& nums, vector<int>& dp){
-        dp[0]=nums[0];
-        dp[1] = max(nums[0], nums[1]);
-        
-        for(int i=2;i<=n;i++){
+    // int f(int n, vector<int>& nums, vector<int>& dp){
+    //     dp[0]=nums[0];
+    //     dp[1] = max(nums[0], nums[1]);
 
-            int pick = nums[i] + dp[i-2];
-            int notpick = 0 + dp[i-1];
-            dp[i] = max(pick, notpick);
-        }
+    //     for(int i=2;i<=n;i++){
 
-        return dp[n];
-    }
+    //         int pick = nums[i] + dp[i-2];
+    //         int notpick = 0 + dp[i-1];
+    //         dp[i] = max(pick, notpick);
+    //     }
+
+    //     return dp[n];
+    // }
+
+    // int rob(vector<int>& nums){
+    //     int n = nums.size();
+    //     vector<int> dp(n, 0);
+    //     return f(n-1, nums, dp);
+    // }
+
+    //!SPACE OPTIMIZED
 
     int rob(vector<int>& nums){
-        int n = nums.size();
-        vector<int> dp(n, 0);
-        return f(n-1, nums, dp);
+        int prev1 = nums[0];
+        int prev2 = 0;
+
+        for(int i=1;i<nums.size();i++){
+            int curri = max(prev1, prev2+nums[i]);
+
+            prev2 = prev1;
+            prev1=curri;
+        }
+        return prev1;
     }
 };
 
