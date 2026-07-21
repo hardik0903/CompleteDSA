@@ -38,7 +38,7 @@ public:
 
     int rob(vector<int>& nums){
         int n=nums.size()-1;
-        vector<int> dp(n);
+        vector<int> dp(n, -1);
         return f(n-1, dp, nums);
     }
 };
