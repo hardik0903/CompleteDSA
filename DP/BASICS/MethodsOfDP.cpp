@@ -23,7 +23,7 @@ public:
 
     int fibonacci(int number, vector<int>& dp){
         dp[0]=0;
-        dp[1]=0;
+        dp[1]=1;
 
         for(int i=2;i<number;i++){
             dp[i] = dp[i-1]+dp[i-2];
@@ -36,7 +36,7 @@ int main(){
     Solution sol;
     int number;
     cin>>number;
-    vector<int> dp(number+1, -1);
+    vector<int> dp(number+1, 0);
     int ans = sol.fibonacci(number, dp);
     cout<<ans;
 
