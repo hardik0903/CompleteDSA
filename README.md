@@ -5,7 +5,7 @@
 ### Structured Data Structures & Algorithms Solutions — Built in Public
 
 [![C++](https://img.shields.io/badge/Language-C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)](https://isocpp.org/)
-[![Problems Solved](https://img.shields.io/badge/Problems%20Solved-215-brightgreen?style=for-the-badge)](https://github.com/hardik0903/CompleteDSA)
+[![Problems Solved](https://img.shields.io/badge/Problems%20Solved-226-brightgreen?style=for-the-badge)](https://github.com/hardik0903/CompleteDSA)
 [![LeetCode](https://img.shields.io/badge/LeetCode-Solutions-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/)
 [![GFG](https://img.shields.io/badge/GeeksforGeeks-Solutions-2F8D46?style=for-the-badge&logo=geeksforgeeks&logoColor=white)](https://www.geeksforgeeks.org/)
 
@@ -33,13 +33,14 @@ Every file is committed individually with a descriptive message. Every solution 
 | [**Binary Search**](./Binary-Search) | 33 | Search Space Reduction, Rotated Arrays, 2D Matrix, Answer on BS |
 | [**Binary Search Tree**](./Binary-Search-Tree) | 12 | Insert/Delete, Validation, LCA, Iterator, Recovery |
 | [**Binary Tree**](./Binary-Tree) | 13 | Traversals, Construction, Serialization, Width, Burning Tree |
-| [**Graphs**](./Graphs) | 28 | BFS/DFS, Dijkstra, Bellman-Ford, Floyd-Warshall, Topo Sort |
+| [**Graphs**](./Graphs) | 35 | BFS/DFS, Dijkstra, Bellman-Ford, Floyd-Warshall, Topo Sort |
 | [**Linked List**](./LinkedList) | 26 | Reversal, Cycle Detection, Merge, Clone, DLL Operations |
 | [**Sliding Window & Two Pointer**](./SlidingWindowTwoPointer) | 11 | Variable Window, Subarray Sum, K-Distinct, Subsequence |
 | [**Stacks & Queues**](./StackAndQueues) | 20 | Monotonic Stack, NGE/NSE, Histogram, LRU Cache, Infix/Postfix |
 | [**Strings**](./String) | 37 | KMP, Rabin-Karp, Palindromes, Anagrams, Pattern Matching |
+| [**Dynamic Programming**](./DP) | 4 | Memoization, Tabulation, Frog Jump, House Robber |
 | **Miscellaneous** | 3 | Hashing, Exponentiation |
-| | **215** | |
+| | **226** | |
 
 ---
 
@@ -70,9 +71,9 @@ CompleteDSA/
 │   └── Leetcode/          # Construction, Serialization, Width
 │
 ├── Graphs/
-│   ├── BASICS/            # BFS, DFS, Dijkstra, Bellman-Ford, Floyd-Warshall
+│   ├── BASICS/            # BFS, DFS, Dijkstra, Bellman-Ford, Floyd-Warshall, Topo, MST
 │   ├── GFG/               # Shortest Paths, Word Ladder
-│   ├── Leetcode/          # Provinces, Enclaves, Course Schedule
+│   ├── Leetcode/          # Provinces, Enclaves, Course Schedule, more
 │   └── Study/             # Cycle Detection, Kahn's Algo, Alien Dict
 │
 ├── LinkedList/
@@ -96,6 +97,11 @@ CompleteDSA/
 │   ├── Coding-Ninjas/     # Palindrome, Replace Spaces
 │   ├── GFG/               # Anagram, Atoi, Binary Strings
 │   └── LeetCode/          # Longest Palindrome, Permutations, Compression
+│
+├── DP/
+│   ├── BASICS/            # Methods of DP
+│   ├── GFG/               # Frog Jump, Ninja Training
+│   └── Leetcode/          # House Robber
 │
 ├── auto_commit.py         # 🔄 Auto-commit watcher script
 └── .gitignore
