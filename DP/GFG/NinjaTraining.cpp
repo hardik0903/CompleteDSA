@@ -43,7 +43,7 @@ int main(){
 
     for(int i=0;i<n;i++){
         for(int j=0;j<ans[i].size();j++){
-            cout<<arr[i][j]<<" ";
+            cout<<ans[i][j]<<" ";
         }
         cout<<endl;
     }
