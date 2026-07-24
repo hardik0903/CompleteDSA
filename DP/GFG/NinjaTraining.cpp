@@ -4,7 +4,7 @@ using namespace std;
 class Solution{
 public:
 
-    int ninjaTraining(vector<vector<int>>& arr){
+    vector<vector<int>> ninjaTraining(vector<vector<int>>& arr){
         int n=arr.size();
 
         vector<vector<int>> dp(n, vector<int>(4, -1));
@@ -25,7 +25,7 @@ public:
                 }
             }
         }
-        return dp[n-1][3];
+        return dp;
     }
 };
 
@@ -39,6 +39,12 @@ int main(){
     }
 
     Solution sol;
-    int ans = sol.ninjaTraining(arr);
-    cout<<ans<<endl;
+    vector<vector<int>> ans = sol.ninjaTraining(arr);
+
+    for(int i=0;i<n;i++){
+        for(int j=0;j<ans[i].size();j++){
+            cout<<arr[i][j]<<" ";
+        }
+        cout<<endl;
+    }
 }
