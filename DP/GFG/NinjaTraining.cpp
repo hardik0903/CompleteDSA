@@ -8,7 +8,7 @@ public:
     //!RECURSION APPROACH
     int f(int ind, int k, vector<vector<int>>& arr){
         if(ind==0){
-            int maxi;
+            int maxi=0;
             for(int i=0;i<=2;i++){
                 if(i!=k){
                     maxi = max(maxi, arr[ind][i]);
@@ -28,7 +28,7 @@ public:
 
         return maxi;
     }
-    
+
     int ninjaTraining(vector<vector<int>>& arr){
         int n=arr.size();
 
