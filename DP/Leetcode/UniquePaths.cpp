@@ -9,7 +9,7 @@ public:
         if(ind1<0 || ind2<0) return 0;
 
         int up = f(ind1-1, ind2);
-        int left = f(ind1, ind2);
+        int left = f(ind1, ind2-1);
 
         return up+left;
     }
