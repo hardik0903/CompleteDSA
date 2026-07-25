@@ -107,7 +107,7 @@ public:
             for(int last=0;last<4;last++){
                 for(int task=0;task<3;task++){
                     if(task!=last){
-                        temp[last] = max(temp[last], max(arr[day][task], dp[last]));
+                        temp[last] = max(temp[last], max(arr[day][task], dp[task]));
                     }
                 }
             }
