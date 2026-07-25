@@ -37,36 +37,36 @@ public:
 
     //!MEMOIZATION APPROACH
 
-    int f(int ind, int k, vector<vector<int>>& dp, vector<vector<int>>& arr){
-        if(ind==0){
-            int maxi=0;
-            for(int i=0;i<=2;i++){
-                if(i!=k){
-                    maxi = max(maxi, arr[ind][i]);
-                }
-            }
-            return maxi;
-        }
-        if(dp[ind][k]!=-1) return dp[ind][k];
+    // int f(int ind, int k, vector<vector<int>>& dp, vector<vector<int>>& arr){
+    //     if(ind==0){
+    //         int maxi=0;
+    //         for(int i=0;i<=2;i++){
+    //             if(i!=k){
+    //                 maxi = max(maxi, arr[ind][i]);
+    //             }
+    //         }
+    //         return maxi;
+    //     }
+    //     if(dp[ind][k]!=-1) return dp[ind][k];
 
-        dp[ind][k]=0;
-        for(int i=0;i<=2;i++){
-            if(i!=k){
-                int points = arr[ind][i] + f(ind-1, i, dp, arr);
-                dp[ind][k] = max(dp[ind][k], points);
-            }
-        }
+    //     dp[ind][k]=0;
+    //     for(int i=0;i<=2;i++){
+    //         if(i!=k){
+    //             int points = arr[ind][i] + f(ind-1, i, dp, arr);
+    //             dp[ind][k] = max(dp[ind][k], points);
+    //         }
+    //     }
 
-        return dp[ind][k];
+    //     return dp[ind][k];
 
-    }
-    int ninjaTraining(vector<vector<int>>& arr){
-        int n=arr.size();
-        vector<vector<int>> dp(n, vector<int>(4, -1));
+    // }
+    // int ninjaTraining(vector<vector<int>>& arr){
+    //     int n=arr.size();
+    //     vector<vector<int>> dp(n, vector<int>(4, -1));
 
-        return f(n-1, 3, dp, arr);
+    //     return f(n-1, 3, dp, arr);
 
-    }
+    // }
 
     //! TABULATION APPROACH
     // int ninjaTraining(vector<vector<int>>& arr){
@@ -92,6 +92,29 @@ public:
     //     }
     //     return dp[n-1][3];
     // }
+
+    //!SPACE OPTIMIZATION
+    int ninjaTraining(vector<vector<int>>& arr){
+        vector<int> dp(4, 0);
+
+        dp[0] = max(arr[0][1], arr[0][2]);
+        dp[1] = max(arr[0][0], arr[0][2]);
+        dp[2] = max(arr[0][0], arr[0][1]);
+        dp[3] = max(arr[0][0], max(arr[0][1], arr[0][2]));
+
+        for(int day=1;day<arr.size();day++){
+            vector<int> temp(4, 0);
+            for(int last=0;last<4;last++){
+                for(int task=0;task<3;task++){
+                    if(task!=last){
+                        temp[last] = max(temp[last], max(arr[day][task], dp[last]));
+                    }
+                }
+            }
+            dp = temp;
+        }
+        return dp[3];
+    }
 };
 
 int main(){
