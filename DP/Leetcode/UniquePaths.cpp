@@ -25,5 +25,5 @@ int main(){
 
     Solution sol;
     int ans = sol.uniquePaths(m, n);
-    cout<<ans;
+    cout<<ans<<endl;
 }
