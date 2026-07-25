@@ -62,7 +62,7 @@ public:
     }
     int ninjaTraining(vector<vector<int>>& arr){
         int n=arr.size();
-        vector<vector<int>> dp(n, vector<int>(4, 0));
+        vector<vector<int>> dp(n, vector<int>(4, -1));
 
         return f(n-1, 3, dp, arr);
 
