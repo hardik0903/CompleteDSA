@@ -4,29 +4,61 @@ using namespace std;
 class Solution{
 public:
 
+
+    //!RECURSION APPROACH
+    int f(int ind, int k, vector<vector<int>>& arr){
+        if(ind==0){
+            int maxi;
+            for(int i=0;i<=2;i++){
+                if(i!=k){
+                    maxi = max(maxi, arr[ind][i]);
+                }
+            }
+            return maxi;
+        }
+
+
+        int maxi=0;
+        for(int i=0;i<=2;i++){
+            if(i!=k){
+                int points = arr[ind][i] + f(ind-1, i, arr);
+                maxi = max(maxi, points);
+            }
+        }
+
+        return maxi;
+    }
+    
     int ninjaTraining(vector<vector<int>>& arr){
         int n=arr.size();
 
-        vector<vector<int>> dp(n, vector<int>(4, -1));
-
-        dp[0][0] = max(arr[0][1], arr[0][2]);
-        dp[0][1] = max(arr[0][0], arr[0][2]);
-        dp[0][2] = max(arr[0][0], arr[0][1]);
-        dp[0][3] = max(arr[0][0], max(arr[0][1], arr[0][2]));
-        int maxi=0;
-        for(int day=1;day<n;day++){
-            for(int last=0;last<4;last++){
-                for(int task=0;task<3;task++){
-                    int point = 0;
-                    if(task!=last){
-                        point = dp[day-1][task] + arr[day][task];
-                        dp[day][last] = max(maxi, point);
-                    }   
-                }
-            }
-        }
-        return dp[n-1][3];
+        return f(n-1, 3, arr);
     }
+
+    //! TABULATION APPROACH
+    // int ninjaTraining(vector<vector<int>>& arr){
+    //     int n=arr.size();
+
+    //     vector<vector<int>> dp(n, vector<int>(4, -1));
+
+    //     dp[0][0] = max(arr[0][1], arr[0][2]);
+    //     dp[0][1] = max(arr[0][0], arr[0][2]);
+    //     dp[0][2] = max(arr[0][0], arr[0][1]);
+    //     dp[0][3] = max(arr[0][0], max(arr[0][1], arr[0][2]));
+    //     int maxi=0;
+    //     for(int day=1;day<n;day++){
+    //         for(int last=0;last<4;last++){
+    //             for(int task=0;task<3;task++){
+    //                 int point = 0;
+    //                 if(task!=last){
+    //                     point = dp[day-1][task] + arr[day][task];
+    //                     dp[day][last] = max(maxi, point);
+    //                 }   
+    //             }
+    //         }
+    //     }
+    //     return dp[n-1][3];
+    // }
 };
 
 int main(){
