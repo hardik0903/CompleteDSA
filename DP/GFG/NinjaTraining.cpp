@@ -6,7 +6,38 @@ public:
 
 
     //!RECURSION APPROACH
-    int f(int ind, int k, vector<vector<int>>& arr){
+    // int f(int ind, int k, vector<vector<int>>& arr){
+    //     if(ind==0){
+    //         int maxi=0;
+    //         for(int i=0;i<=2;i++){
+    //             if(i!=k){
+    //                 maxi = max(maxi, arr[ind][i]);
+    //             }
+    //         }
+    //         return maxi;
+    //     }
+
+
+    //     int maxi=0;
+    //     for(int i=0;i<=2;i++){
+    //         if(i!=k){
+    //             int points = arr[ind][i] + f(ind-1, i, arr);
+    //             maxi = max(maxi, points);
+    //         }
+    //     }
+
+    //     return maxi;
+    // }
+
+    // int ninjaTraining(vector<vector<int>>& arr){
+    //     int n=arr.size();
+
+    //     return f(n-1, 3, arr);
+    // }
+
+    //!MEMOIZATION APPROACH
+
+    int f(int ind, int k, vector<vector<int>>& dp, vector<vector<int>>& arr){
         if(ind==0){
             int maxi=0;
             for(int i=0;i<=2;i++){
@@ -16,23 +47,25 @@ public:
             }
             return maxi;
         }
+        if(dp[ind][k]!=-1) return dp[ind][k];
 
-
-        int maxi=0;
+        dp[ind][k]=0;
         for(int i=0;i<=2;i++){
             if(i!=k){
-                int points = arr[ind][i] + f(ind-1, i, arr);
-                maxi = max(maxi, points);
+                int points = arr[ind][i] + f(ind-1, i, dp, arr);
+                dp[ind][k] = max(dp[ind][k], points);
             }
         }
 
-        return maxi;
-    }
+        return dp[ind][k];
 
+    }
     int ninjaTraining(vector<vector<int>>& arr){
         int n=arr.size();
+        vector<vector<int>> dp(n, vector<int>(4, 0));
 
-        return f(n-1, 3, arr);
+        return f(n-1, 3, dp, arr);
+
     }
 
     //! TABULATION APPROACH
