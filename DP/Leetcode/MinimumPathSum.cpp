@@ -11,7 +11,7 @@ public:
             return grid[0][0];
         }
 
-        if(i<0 || j<0) return INT_MAX;
+        if(i<0 || j<0) return 1e9;
 
         int up = grid[i][j] + f(i-1, j, grid);
         int left = grid[i][j] + f(i, j-1, grid);
