@@ -2,14 +2,19 @@
 Auto-Commit & Push Script for DSA Repository
 =============================================
 
-This script monitors the repository directory for `.exe` file creation or
-modification events. When a new/modified `.exe` is detected, it:
+This script monitors the repository directory for compiled binaries being
+created or updated (i.e. a successful `g++ NinjaTraining.cpp -o NinjaTraining`).
+When such a binary is detected, it finds the matching `.cpp` source
+(same name, same directory) and:
 
-  1. Finds the corresponding `.cpp` source file (same name, same directory).
-  2. Stages the `.cpp` file with `git add`.
-  3. Generates a meaningful commit message from the file's path
+  1. Stages the `.cpp` file with `git add`.
+  2. Generates a meaningful commit message from the file's path
      (e.g., "Add Array/LEETCODE: 4Sum").
-  4. Commits and pushes to `origin main`.
+  3. Commits and pushes to `origin main`.
+
+A file only counts as a "compiled binary" if it has no extension, is
+executable, and has a sibling `.cpp` with the same name — this filters
+out unrelated no-extension files (Makefile, LICENSE, .git internals, etc).
 
 Usage:
     python auto_commit.py
@@ -120,12 +125,12 @@ def build_commit_message(rel_path: str) -> str:
         return f"{verb} {problem_name}"
 
 
-class ExeEventHandler(FileSystemEventHandler):
-    """Watches for .exe creation / modification and auto-commits the .cpp."""
+class BinaryEventHandler(FileSystemEventHandler):
+    """Watches for compiled-binary creation / update and auto-commits the matching .cpp."""
 
     def __init__(self) -> None:
         super().__init__()
-        # {absolute_exe_path: last_commit_timestamp}
+        # {absolute_cpp_path: last_commit_timestamp}
         self._cooldowns: dict[str, float] = {}
 
     # ── Event Callbacks ─────────────────────────────────────────────────
@@ -140,33 +145,40 @@ class ExeEventHandler(FileSystemEventHandler):
 
     # ── Core Logic ──────────────────────────────────────────────────────
 
-    def _handle(self, exe_path: str) -> None:
-        # Only care about .exe files
-        if not exe_path.lower().endswith(".exe"):
+    def _handle(self, binary_path: str) -> None:
+        abs_binary = os.path.abspath(binary_path)
+
+        # Ignore anything inside .git
+        if os.sep + ".git" + os.sep in abs_binary:
             return
 
-        abs_exe = os.path.abspath(exe_path)
+        # A "compiled binary" has no extension …
+        if os.path.splitext(abs_binary)[1] != "":
+            return
+
+        # … must actually exist as a regular file …
+        if not os.path.isfile(abs_binary):
+            return
+
+        # … must be executable …
+        if not os.access(abs_binary, os.X_OK):
+            return
+
+        # … and must have a matching .cpp source next to it.
+        abs_cpp = abs_binary + ".cpp"
+        if not os.path.isfile(abs_cpp):
+            return
 
         # ── Cooldown check ──────────────────────────────────────────────
         now = time.time()
-        last = self._cooldowns.get(abs_exe, 0)
+        last = self._cooldowns.get(abs_cpp, 0)
         if now - last < COOLDOWN_SECONDS:
-            log_skip(f"Cooldown active — skipping {os.path.basename(abs_exe)}")
+            log_skip(f"Cooldown active — skipping {os.path.basename(abs_cpp)}")
             return
-        self._cooldowns[abs_exe] = now
+        self._cooldowns[abs_cpp] = now
 
-        # ── Find corresponding .cpp ─────────────────────────────────────
-        cpp_path = os.path.splitext(abs_exe)[0] + ".cpp"
-        rel_exe = os.path.relpath(abs_exe, REPO_DIR).replace("\\", "/")
-
-        log_info(f"Detected .exe → {BOLD}{rel_exe}{RESET}")
-
-        if not os.path.isfile(cpp_path):
-            log_skip(f"No matching .cpp found — skipping")
-            return
-
-        rel_cpp = os.path.relpath(cpp_path, REPO_DIR).replace("\\", "/")
-        log_info(f"Found source   → {BOLD}{rel_cpp}{RESET}")
+        rel_cpp = os.path.relpath(abs_cpp, REPO_DIR).replace("\\", "/")
+        log_info(f"Detected compiled binary → {BOLD}{rel_cpp}{RESET}")
 
         # ── git add ─────────────────────────────────────────────────────
         try:
@@ -221,7 +233,7 @@ def print_banner() -> None:
 
   {CYAN}Repo :{RESET}  {BOLD}{REPO_DIR}{RESET}
   {CYAN}Watch:{RESET}  Recursive — all subdirectories
-  {CYAN}For  :{RESET}  .exe creation / modification → auto-commit .cpp
+  {CYAN}For  :{RESET}  compiled binary appears → auto-commit & push matching .cpp
 
   {YELLOW}Press Ctrl+C to stop.{RESET}
 """
@@ -231,12 +243,12 @@ def print_banner() -> None:
 def main() -> None:
     print_banner()
 
-    event_handler = ExeEventHandler()
+    event_handler = BinaryEventHandler()
     observer = Observer()
     observer.schedule(event_handler, REPO_DIR, recursive=True)
     observer.start()
 
-    log_info("Watcher started — waiting for .exe events …")
+    log_info("Watcher started — waiting for compiled binaries …")
     print()
 
     try:
