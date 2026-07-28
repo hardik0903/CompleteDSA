@@ -6,21 +6,40 @@ public:
 
 
     //!RECURSION APPROACH
-    int f(int ind1, int ind2, vector<vector<int>>& triangle){
+    // int f(int ind1, int ind2, vector<vector<int>>& triangle){
+    //     int n=triangle.size();
+    //     if(ind1==n-1) return triangle[n-1][ind2];
+
+    //     int down = triangle[ind1][ind2] + f(ind1+1, ind2, triangle);
+    //     int diagonal = triangle[ind1][ind2] + f(ind1+1, ind2+1, triangle);
+
+    //     return min(down, diagonal);
+
+    // }
+    // int minimumTotal(vector<vector<int>>& triangle) {
+
+    //     int n = triangle.size();
+    //     return f(0, 0, triangle);
+    // }
+
+    //!MEMOIZATION APPROACH
+    int f(int ind1, int ind2, vector<vector<int>>& triangle, vector<vector<int>>& dp){
         int n=triangle.size();
         if(ind1==n-1) return triangle[n-1][ind2];
 
-        int down = triangle[ind1][ind2] + f(ind1+1, ind2, triangle);
-        int diagonal = triangle[ind1][ind2] + f(ind1+1, ind2+1, triangle);
+        if(dp[ind1][ind2]!=-1) return dp[ind1][ind2];
+        int down = triangle[ind1][ind2] + f(ind1+1, ind2, triangle, dp);
+        int diagonal = triangle[ind1][ind2] + f(ind1+1, ind2+1, triangle, dp);
 
-        return min(down, diagonal);
+        return dp[ind1][ind2]=min(down, diagonal);
 
     }
     int minimumTotal(vector<vector<int>>& triangle) {
-
-        int n = triangle.size();
-        return f(0, 0, triangle);
+        int n=triangle.size();
+        vector<vector<int>> dp(n, vector<int>(n, -1));
+        return f(0, 0, triangle, dp);
     }
+
     //!TABULATION APPROACH
     // int minimumTotal(vector<vector<int>>& triangle) {
     //     int n=triangle.size();
