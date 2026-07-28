@@ -28,6 +28,8 @@ int main(){
     vector<vector<int>> arr;
     int n;
     cin>>n;
+
+    cin.ignore(); 
     
     for (int i = 0; i < n; ++i) {
         string line;
