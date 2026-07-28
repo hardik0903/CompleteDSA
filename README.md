@@ -38,9 +38,9 @@ Every file is committed individually with a descriptive message. Every solution 
 | [**Sliding Window & Two Pointer**](./SlidingWindowTwoPointer) | 11 | Variable Window, Subarray Sum, K-Distinct, Subsequence |
 | [**Stacks & Queues**](./StackAndQueues) | 20 | Monotonic Stack, NGE/NSE, Histogram, LRU Cache, Infix/Postfix |
 | [**Strings**](./String) | 37 | KMP, Rabin-Karp, Palindromes, Anagrams, Pattern Matching |
-| [**Dynamic Programming**](./DP) | 4 | Memoization, Tabulation, Frog Jump, House Robber |
+| [**Dynamic Programming**](./DP) | 7 | Memoization, Tabulation, Frog Jump, House Robber, NinjaTraining, MinimumPathSum, Triangle |
 | **Miscellaneous** | 3 | Hashing, Exponentiation |
-| | **226** | |
+| | **229** | |
 
 ---
 
