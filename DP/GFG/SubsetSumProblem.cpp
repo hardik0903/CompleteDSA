@@ -51,9 +51,9 @@ public:
 
     //! TABULATION APPROACH
 
-    bool subsetSumTarget(vector<int>& nums, int target){
+    bool subsetSumTarget(vector<int>& nums, int target, vector<vector<bool>>& dp){
         int n = nums.size();
-        vector<vector<bool>> dp(n, vector<bool>(target+1, 0));
+        
 
         for(int i=0;i<n;i++){
             dp[i][0] = 1;
@@ -92,12 +92,19 @@ int main(){
     int n=nums.size();
     int k;
     cin>>k;
-    
+    vector<vector<bool>> dp(n, vector<bool>(k+1, 0));
     Solution sol;
-    if(sol.subsetSumTarget(nums, k)){
+    if(sol.subsetSumTarget(nums, k, dp)){
         cout<<"Element exists"<<endl;
     }
     else{
         cout<<"Element doesn't exists"<<endl;
+    }
+
+    for(int i=0;i<dp.size();i++){
+        for(int j=0;j<dp[0].size();j++){
+            cout<<dp[i][j]<<" ";
+        }
+        cout<<endl;
     }
 }
