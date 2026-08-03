@@ -39,9 +39,9 @@ int main(){
 
     Solution sol;
     if(sol.subsetSumTarget(nums, k)){
-        cout<<"Element exists";
+        cout<<"Element exists"<<endl;
     }
     else{
-        cout<<"Element doesn't exists";
+        cout<<"Element doesn't exists"<<endl;
     }
 }
