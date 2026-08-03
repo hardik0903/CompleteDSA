@@ -74,5 +74,6 @@ int main(){
         for(int j=0;j<dp[0].size();j++){
             cout<<dp[i][j]<<" ";
         }
+        cout<<endl;
     }
 }
