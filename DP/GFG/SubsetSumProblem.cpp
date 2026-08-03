@@ -43,9 +43,9 @@ public:
         return dp[ind][target] = take || notTake;
     }
 
-    bool subsetSumTarget(vector<int>& nums, int target){
+    bool subsetSumTarget(vector<int>& nums, int target, vector<vector<int>>& dp){
         int n=nums.size();
-        vector<vector<int>> dp(n, vector<int> (target+1, -1));
+        
         return f(n-1, target, nums, dp);
     }
 };
@@ -58,15 +58,21 @@ int main(){
     stringstream ss(line);
     int x;
     while(ss>>x) nums.push_back(x);
-
+    int n=nums.size();
     int k;
     cin>>k;
-
+    vector<vector<int>> dp(n, vector<int> (k+1, -1));
     Solution sol;
-    if(sol.subsetSumTarget(nums, k)){
+    if(sol.subsetSumTarget(nums, k, dp)){
         cout<<"Element exists"<<endl;
     }
     else{
         cout<<"Element doesn't exists"<<endl;
+    }
+
+    for(int i=0;i<dp.size();i++){
+        for(int j=0;j<dp[0].size();j++){
+            cout<<dp[i][j]<<" ";
+        }
     }
 }
