@@ -56,7 +56,7 @@ public:
         vector<vector<bool>> dp(n, vector<bool>(target+1, 0));
 
         for(int i=0;i<n;i++){
-            dp[n][0] = 1;
+            dp[i][0] = 1;
         }
 
         if(target>=nums[0]){
@@ -66,18 +66,18 @@ public:
         for(int i=1;i<n;i++){
             for(int j=1;j<=target;j++){
 
-                bool notTake = dp[i-1][target];
+                bool notTake = dp[i-1][j];
                 bool take=false;
 
-                if(target>=nums[i]){
-                    take = dp[i-1][target-nums[i]];
+                if(j>=nums[i]){
+                    take = dp[i-1][j-nums[i]];
                 }
 
                 dp[i][j] = take || notTake;
             }
         }
 
-        dp[n-1][target];
+        return dp[n-1][target];
     }
 };
 
