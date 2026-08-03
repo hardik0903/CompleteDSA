@@ -45,7 +45,7 @@ public:
 
     bool subsetSumTarget(vector<int>& nums, int target){
         int n=nums.size();
-        vector<vector<int>> dp(n, vector<int> (target, -1));
+        vector<vector<int>> dp(n, vector<int> (target+1, -1));
         return f(n-1, target, nums, dp);
     }
 };
