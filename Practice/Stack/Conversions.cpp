@@ -27,7 +27,7 @@ public:
                 if(st.top()=='+' || st.top()=='-'){
                     st.push(ch);
                 }
-                while(st.top()!='+' || st.top()!='-' || !st.empty()){
+                while(!st.empty() || st.top()!='+' || st.top()!='-'){
                     ans+=st.top();
                     st.pop();
                 }
