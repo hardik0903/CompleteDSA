@@ -57,7 +57,7 @@ int main(){
     vector<int> arr(n);
     for(int i=0;i<n;i++){
         int num;
-        cout<<"Enter elemets at position : "<<i<<" :";
+        cout<<"Enter elements at position : "<<i<<" :";
         cin>>num;
         arr[i] = num;
     }
