@@ -44,7 +44,7 @@ public:
 
         vector<vector<int>> dp(n, vector<int>(size+1, -1));
 
-        return f(n, size, dp, arr);
+        return f(n-1, size, dp, arr);
     }
 };
 
