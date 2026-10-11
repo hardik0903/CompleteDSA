@@ -68,5 +68,5 @@ int main(){
     Solution sol;
 
     int ans = sol.countPartition(arr, diff);
-    cout<<ans;
+    cout<<ans<<endl;
 }
