@@ -42,7 +42,7 @@ public:
 
         int size = rem/2;
 
-        vector<vector<int>> dp(n, vector<int>(size, -1));
+        vector<vector<int>> dp(n, vector<int>(size+1, -1));
 
         return f(n, size, dp, arr);
     }
