@@ -73,30 +73,52 @@ public:
     // }
 
     //Tabulation
-    int knapsack(int W, vector<int>& wt, vector<int>& val, vector<vector<int>>& dp){
+    // int knapsack(int W, vector<int>& wt, vector<int>& val, vector<vector<int>>& dp){
+    //     int n = wt.size();
+
+
+    //     //Base case says at index 0, weight that is greater than capacity of bag is considered
+    //     for(int i=wt[0];i<=W;i++){
+    //         dp[0][i] = val[0];
+    //     }
+
+    //     //Loop and recurrence logic
+    //     for(int ind = 1;ind<n;ind++){
+    //         for(int wei=0;wei<=W;wei++){
+
+    //             int notPick = 0 + dp[ind-1][wei];
+    //             int pick = INT_MIN;
+    //             if(wt[ind]<=wei){
+    //                 pick = val[ind] + dp[ind-1][wei-wt[ind]];
+    //             }  
+
+    //             dp[ind][wei] = max(pick, notPick);
+    //         }
+    //     }
+
+    //     return dp[n-1][W];
+    // }
+
+    //Space optimization first
+    int knapsack(int weight, vector<int>& wt, vector<int>& val, vector<int>& prev, vector<int>& cur){
+
         int n = wt.size();
 
-
-        //Base case says at index 0, weight that is greater than capacity of bag is considered
-        for(int i=wt[0];i<=W;i++){
-            dp[0][i] = val[0];
+        for(int i = wt[0];i<weight;i++){
+            prev[i] = val[0];
         }
 
-        //Loop and recurrence logic
-        for(int ind = 1;ind<n;ind++){
-            for(int wei=0;wei<=W;wei++){
-
-                int notPick = 0 + dp[ind-1][wei];
+        for(int ind=1;ind<n;ind++){
+            for(int w=weight;w>=0;w--){
+                int notPick = 0 + prev[w];
                 int pick = INT_MIN;
-                if(wt[ind]<=wei){
-                    pick = val[ind] + dp[ind-1][wei-wt[ind]];
-                }  
-
-                dp[ind][wei] = max(pick, notPick);
+                if(wt[ind]<=w){
+                    pick = val[ind] + prev[w-wt[ind]];
+                }
             }
+            prev = cur;
         }
-
-        return dp[n-1][W];
+        return prev[weight];
     }
 };
 
@@ -125,16 +147,25 @@ int main(){
     }
 
     Solution sol;
-    vector<vector<int>> dp(n, vector<int>(W+1, 0));
-    int ans = sol.knapsack(W, wt, val, dp);
+    // vector<vector<int>> dp(n, vector<int>(W+1, 0));
+    vector<int> prev(W+1, 0), cur(W+1, 0);
+    int ans = sol.knapsack(W, wt, val, prev, cur);
     cout<<ans<<endl;
-    
-    for(int i=0; i<dp.size(); i++){
-        for(int j=0;j<dp[0].size();j++){
-            cout<<dp[i][j]<<" ";
-        }
-        cout<<endl;
+
+    // for(int i=0; i<dp.size(); i++){
+    //     for(int j=0;j<dp[0].size();j++){
+    //         cout<<dp[i][j]<<" ";
+    //     }
+    //     cout<<endl;
+    // }
+
+    cout<<"Prev values: ";
+    for(int num:prev){
+        cout<<num<<" ";
     }
-
-
+    cout<<endl;
+    cout<<"Cur Values: ";
+    for(int num:cur){
+        cout<<num<<" ";
+    }
 }
