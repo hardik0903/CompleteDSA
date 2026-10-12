@@ -39,37 +39,64 @@ public:
     // }
 
     //Memoization
-    int f(int ind, int weight, vector<int>& wt, vector<int>& val, vector<vector<int>>& dp){
+    // int f(int ind, int weight, vector<int>& wt, vector<int>& val, vector<vector<int>>& dp){
 
-        //Base case
-        if(ind==0){
+    //     //Base case
+    //     if(ind==0){
 
-            //Condition 1: Check whether it is a take 
-            if(wt[0]<=weight){
-                return val[0];
-            } 
-            //Condition 2: Not take
-            else{
-                return 0;
-            }
-        }
+    //         //Condition 1: Check whether it is a take 
+    //         if(wt[0]<=weight){
+    //             return val[0];
+    //         } 
+    //         //Condition 2: Not take
+    //         else{
+    //             return 0;
+    //         }
+    //     }
 
-        //BASIC PICK AND NOTPICK LOGIC
-        if(dp[ind][weight]!=-1) return dp[ind][weight];
+    //     //BASIC PICK AND NOTPICK LOGIC
+    //     if(dp[ind][weight]!=-1) return dp[ind][weight];
 
-        int notTake = 0 + f(ind-1, weight, wt, val, dp);
-        int take = INT_MIN;
-        // Check whether take can be performed or not
-        if(wt[ind] <= weight){
-            take = val[ind] + f(ind-1, weight-wt[ind], wt, val, dp);
-        }
+    //     int notTake = 0 + f(ind-1, weight, wt, val, dp);
+    //     int take = INT_MIN;
+    //     // Check whether take can be performed or not
+    //     if(wt[ind] <= weight){
+    //         take = val[ind] + f(ind-1, weight-wt[ind], wt, val, dp);
+    //     }
 
-        return dp[ind][weight] = max(notTake, take);
-    }
+    //     return dp[ind][weight] = max(notTake, take);
+    // }
+    // int knapsack(int W, vector<int>& wt, vector<int>& val, vector<vector<int>>& dp){
+    //     int n = wt.size();
+
+    //     return f(n-1, W, wt, val, dp);
+    // }
+
+    //Tabulation
     int knapsack(int W, vector<int>& wt, vector<int>& val, vector<vector<int>>& dp){
         int n = wt.size();
 
-        return f(n-1, W, wt, val, dp);
+
+        //Base case says at index 0, weight that is greater than capacity of bag is considered
+        for(int i=wt[0];i<W;i++){
+            dp[0][i] = val[0];
+        }
+
+        //Loop and recurrence logic
+        for(int ind = 1;ind<n;ind++){
+            for(int wei=0;wei<W;wei++){
+
+                int notPick = 0 + dp[ind-1][wei];
+                int pick = INT_MIN;
+                if(wt[ind]<wei){
+                    pick = val[ind] + dp[ind-1][wei-wt[ind]];
+                }  
+
+                dp[ind][wei] = max(pick, notPick);
+            }
+        }
+
+        return dp[n-1][W];
     }
 };
 
