@@ -125,7 +125,7 @@ int main(){
     }
 
     Solution sol;
-    vector<vector<int>> dp(n, vector<int>(W+1, -1));
+    vector<vector<int>> dp(n, vector<int>(W+1, 0));
     int ans = sol.knapsack(W, wt, val, dp);
     cout<<ans<<endl;
     
