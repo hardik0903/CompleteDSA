@@ -100,7 +100,32 @@ public:
     // }
 
     //Space optimization first
-    int knapsack(int weight, vector<int>& wt, vector<int>& val, vector<int>& prev, vector<int>& cur){
+    // int knapsack(int weight, vector<int>& wt, vector<int>& val, vector<int>& prev, vector<int>& cur){
+
+    //     int n = wt.size();
+
+    //     for(int i = wt[0];i<=weight;i++){
+    //         prev[i] = val[0];
+    //     }
+
+    //     for(int ind=1;ind<n;ind++){
+    //         for(int w=weight;w>=0;w--){
+
+    //             int notPick = 0 + prev[w];
+    //             int pick = INT_MIN;
+    //             if(wt[ind]<=w){
+    //                 pick = val[ind] + prev[w-wt[ind]];
+    //             }
+
+    //             cur[w] = max(pick, notPick);
+    //         }
+    //         prev = cur;
+    //     }
+    //     return prev[weight];
+    // }
+
+    //Space optimization second
+    int knapsack(int weight, vector<int>& wt, vector<int>& val, vector<int>& prev){
 
         int n = wt.size();
 
@@ -117,12 +142,12 @@ public:
                     pick = val[ind] + prev[w-wt[ind]];
                 }
 
-                cur[w] = max(pick, notPick);
+                prev[w] = max(pick, notPick);
             }
-            prev = cur;
         }
         return prev[weight];
     }
+
 };
 
 
@@ -152,7 +177,7 @@ int main(){
     Solution sol;
     // vector<vector<int>> dp(n, vector<int>(W+1, 0));
     vector<int> prev(W+1, 0), cur(W+1, 0);
-    int ans = sol.knapsack(W, wt, val, prev, cur);
+    int ans = sol.knapsack(W, wt, val, prev);
     cout<<ans<<endl;
 
     // for(int i=0; i<dp.size(); i++){
@@ -167,8 +192,8 @@ int main(){
         cout<<num<<" ";
     }
     cout<<endl;
-    cout<<"Cur Values: ";
-    for(int num:cur){
-        cout<<num<<" ";
-    }
+    // cout<<"Cur Values: ";
+    // for(int num:cur){
+    //     cout<<num<<" ";
+    // }
 }
