@@ -78,13 +78,13 @@ public:
 
 
         //Base case says at index 0, weight that is greater than capacity of bag is considered
-        for(int i=wt[0];i<W;i++){
+        for(int i=wt[0];i<=W;i++){
             dp[0][i] = val[0];
         }
 
         //Loop and recurrence logic
         for(int ind = 1;ind<n;ind++){
-            for(int wei=0;wei<W;wei++){
+            for(int wei=0;wei<=W;wei++){
 
                 int notPick = 0 + dp[ind-1][wei];
                 int pick = INT_MIN;
