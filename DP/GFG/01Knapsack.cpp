@@ -116,6 +116,8 @@ public:
                 if(wt[ind]<=w){
                     pick = val[ind] + prev[w-wt[ind]];
                 }
+
+                cur[w] = max(pick, notPick);
             }
             prev = cur;
         }
