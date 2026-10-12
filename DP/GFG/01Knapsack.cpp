@@ -88,7 +88,7 @@ public:
 
                 int notPick = 0 + dp[ind-1][wei];
                 int pick = INT_MIN;
-                if(wt[ind]<wei){
+                if(wt[ind]<=wei){
                     pick = val[ind] + dp[ind-1][wei-wt[ind]];
                 }  
 
