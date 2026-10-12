@@ -104,12 +104,13 @@ public:
 
         int n = wt.size();
 
-        for(int i = wt[0];i<weight;i++){
+        for(int i = wt[0];i<=weight;i++){
             prev[i] = val[0];
         }
 
         for(int ind=1;ind<n;ind++){
             for(int w=weight;w>=0;w--){
+
                 int notPick = 0 + prev[w];
                 int pick = INT_MIN;
                 if(wt[ind]<=w){
