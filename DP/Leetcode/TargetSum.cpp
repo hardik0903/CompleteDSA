@@ -234,7 +234,7 @@ public:
         }
 
         for(int ind = 1;ind<n;ind++){
-            for(int tar = 0;tar<=size;tar++){
+            for(int tar = size;tar>=0;tar--){
 
                 int notPick = prev[tar];
                 int pick = 0;
