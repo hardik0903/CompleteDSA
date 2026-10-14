@@ -123,10 +123,10 @@ public:
         vector<vector<int>> dp(n, vector<int>(size+1, 0));
 
         for(int i=0;i<=size;i++){
-            if(i==0 && nums[i]==0){
+            if(i==0 && nums[0]==0){
                 dp[0][i] = 2;
             }
-            else if(i==0 || nums[i]==i){
+            else if(i==0 || nums[0]==i){
                 dp[0][i] = 1;
             }
             else dp[0][i] = 0;
