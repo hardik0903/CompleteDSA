@@ -106,6 +106,56 @@ public:
     // }
 
     //Tabulation
+    // int targetSum(vector<int>& nums, int target){
+    //     int n = nums.size();
+
+    //     int totSum = 0;
+
+    //     for(int num:nums){
+    //         totSum +=num;
+    //     }
+
+    //     int rem = totSum - target;
+    //     if(rem<0 || rem%2!=0) return 0;
+
+    //     int size = rem/2;
+        
+    //     vector<vector<int>> dp(n, vector<int>(size+1, 0));
+
+    //     for(int i=0;i<=size;i++){
+    //         if(i==0 && nums[0]==0){
+    //             dp[0][i] = 2;
+    //         }
+    //         else if(i==0 || nums[0]==i){
+    //             dp[0][i] = 1;
+    //         }
+    //         else dp[0][i] = 0;
+    //     }
+
+    //     for(int ind = 1;ind<n;ind++){
+    //         for(int tar = 0;tar<=size;tar++){
+
+    //             int notPick = dp[ind-1][tar];
+    //             int pick = 0;
+    //             if(tar>=nums[ind]){
+    //                 pick = dp[ind-1][tar-nums[ind]];
+    //             }
+
+    //             dp[ind][tar] = pick+notPick;
+    //         }
+    //     }
+
+    //     for(int i=0;i<n;i++){
+    //         for(int j=0;j<=size;j++){
+    //             cout<<dp[i][j]<<" ";
+    //         }
+    //         cout<<endl;
+    //     }
+
+    //     return dp[n-1][size];
+    // }
+
+    //Space Optimization
     int targetSum(vector<int>& nums, int target){
         int n = nums.size();
 
@@ -120,39 +170,40 @@ public:
 
         int size = rem/2;
         
-        vector<vector<int>> dp(n, vector<int>(size+1, 0));
+        vector<int> prev(size+1, 0), cur(size+1, 0);
 
         for(int i=0;i<=size;i++){
             if(i==0 && nums[0]==0){
-                dp[0][i] = 2;
+                prev[i] = 2;
             }
             else if(i==0 || nums[0]==i){
-                dp[0][i] = 1;
+                prev[i] = 1;
             }
-            else dp[0][i] = 0;
+            else prev[i] = 0;
         }
 
         for(int ind = 1;ind<n;ind++){
             for(int tar = 0;tar<=size;tar++){
 
-                int notPick = dp[ind-1][tar];
+                int notPick = prev[tar];
                 int pick = 0;
                 if(tar>=nums[ind]){
-                    pick = dp[ind-1][tar-nums[ind]];
+                    pick = prev[tar-nums[ind]];
                 }
 
-                dp[ind][tar] = pick+notPick;
+                cur[tar] = pick+notPick;
             }
+            prev = cur;
         }
 
-        for(int i=0;i<n;i++){
-            for(int j=0;j<=size;j++){
-                cout<<dp[i][j]<<" ";
-            }
-            cout<<endl;
-        }
+        // for(int i=0;i<n;i++){
+        //     for(int j=0;j<=size;j++){
+        //         cout<<dp[i][j]<<" ";
+        //     }
+        //     cout<<endl;
+        // }
 
-        return dp[n-1][size];
+        return prev[size];
     }
 };
 
