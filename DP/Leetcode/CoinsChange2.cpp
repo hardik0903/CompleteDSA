@@ -87,10 +87,37 @@ public:
     // }
 
     //Space optimization 1
+    // int coinsChange(int amount, vector<int>& coins){
+
+    //     int n = coins.size();
+    //     vector<long long> prev(amount+1, 0), cur(amount+1, 0);
+
+    //     for(int i=0;i<=amount;i++){
+    //         prev[i] = (i%coins[0]==0);
+    //     }
+
+    //     for(int ind=1;ind<n;ind++){
+    //         for(int tar=0;tar<=amount;tar++){
+
+    //             int notPick = prev[tar];
+    //             int pick = 0;
+    //             if(tar>=coins[ind]){
+    //                 pick = cur[tar-coins[ind]];
+    //             }
+
+    //             cur[tar] = (long long)pick+notPick;
+    //         }
+    //         prev = cur;
+    //     }
+
+    //     return prev[amount];
+    // }
+
+    //Space Optimization 2
     int coinsChange(int amount, vector<int>& coins){
 
         int n = coins.size();
-        vector<long long> prev(amount+1, 0), cur(amount+1, 0);
+        vector<long long> prev(amount+1, 0);
 
         for(int i=0;i<=amount;i++){
             prev[i] = (i%coins[0]==0);
@@ -102,12 +129,11 @@ public:
                 int notPick = prev[tar];
                 int pick = 0;
                 if(tar>=coins[ind]){
-                    pick = cur[tar-coins[ind]];
+                    pick = prev[tar-coins[ind]];
                 }
 
-                cur[tar] = (long long)pick+notPick;
+                prev[tar] = (long long)pick+notPick;
             }
-            prev = cur;
         }
 
         return prev[amount];
