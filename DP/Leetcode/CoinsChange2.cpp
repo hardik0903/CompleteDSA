@@ -27,37 +27,64 @@ public:
     // }
 
     // Memoization
-    int f(int ind, int target, vector<int>& coins, vector<vector<int>>& dp){
+    // int f(int ind, int target, vector<int>& coins, vector<vector<int>>& dp){
 
-        if(ind==0){
+    //     if(ind==0){
 
-            return (target%coins[0]==0);
-        }
+    //         return (target%coins[0]==0);
+    //     }
 
-        if(dp[ind][target]!=-1) return dp[ind][target];
+    //     if(dp[ind][target]!=-1) return dp[ind][target];
 
-        int notPick = f(ind-1, target, coins, dp);
-        int pick = 0;
-        if(target>=coins[ind]){
-            pick = f(ind, target-coins[ind], coins, dp);
-        }
-        return dp[ind][target] = pick+notPick;
-    }
+    //     int notPick = f(ind-1, target, coins, dp);
+    //     int pick = 0;
+    //     if(target>=coins[ind]){
+    //         pick = f(ind, target-coins[ind], coins, dp);
+    //     }
+    //     return dp[ind][target] = pick+notPick;
+    // }
+
+    // int coinsChange(int amount, vector<int>& coins){
+
+    //     int n = coins.size();
+    //     vector<vector<int>> dp(n, vector<int>(amount+1, -1));
+    //     int ans =  f(n-1, amount, coins, dp);
+
+    //     for(int i=0;i<n;i++){
+    //         for(int tar=0;tar<=amount;tar++){
+    //             cout<<dp[i][tar]<<" ";
+    //         }
+    //         cout<<endl;
+    //     }
+
+    //     return ans;
+    // }
+
+    //Tabulation
 
     int coinsChange(int amount, vector<int>& coins){
 
         int n = coins.size();
-        vector<vector<int>> dp(n, vector<int>(amount+1, -1));
-        int ans =  f(n-1, amount, coins, dp);
+        vector<vector<long long>> dp(n, vector<long long>(amount+1, 0));
 
-        for(int i=0;i<n;i++){
-            for(int tar=0;tar<=amount;tar++){
-                cout<<dp[i][tar]<<" ";
-            }
-            cout<<endl;
+        for(int i=0;i<=amount;i++){
+            dp[0][i] = (i%coins[0]==0);
         }
-        
-        return ans;
+
+        for(int ind=1;ind<n;ind++){
+            for(int tar=0;tar<=amount;tar++){
+
+                int notPick=dp[ind-1][tar];
+                int pick = 0;
+                if(tar>=coins[ind]){
+                    pick = dp[ind][tar-coins[ind]];
+                }
+
+                dp[ind][tar] = (long long)pick+notPick;
+            }
+        }
+
+        return dp[n-1][amount];
     }
 };
 
