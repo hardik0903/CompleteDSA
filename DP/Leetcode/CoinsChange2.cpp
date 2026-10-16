@@ -61,30 +61,56 @@ public:
     // }
 
     //Tabulation
+    // int coinsChange(int amount, vector<int>& coins){
 
+    //     int n = coins.size();
+    //     vector<vector<long long>> dp(n, vector<long long>(amount+1, 0));
+
+    //     for(int i=0;i<=amount;i++){
+    //         dp[0][i] = (i%coins[0]==0);
+    //     }
+
+    //     for(int ind=1;ind<n;ind++){
+    //         for(int tar=0;tar<=amount;tar++){
+
+    //             int notPick=dp[ind-1][tar];
+    //             int pick = 0;
+    //             if(tar>=coins[ind]){
+    //                 pick = dp[ind][tar-coins[ind]];
+    //             }
+
+    //             dp[ind][tar] = (long long)pick+notPick;
+    //         }
+    //     }
+
+    //     return dp[n-1][amount];
+    // }
+
+    //Space optimization 1
     int coinsChange(int amount, vector<int>& coins){
 
         int n = coins.size();
-        vector<vector<long long>> dp(n, vector<long long>(amount+1, 0));
+        vector<long long> prev(amount+1, 0), cur(amount+1, 0);
 
         for(int i=0;i<=amount;i++){
-            dp[0][i] = (i%coins[0]==0);
+            prev[i] = (i%coins[0]==0);
         }
 
         for(int ind=1;ind<n;ind++){
             for(int tar=0;tar<=amount;tar++){
 
-                int notPick=dp[ind-1][tar];
+                int notPick = prev[tar];
                 int pick = 0;
                 if(tar>=coins[ind]){
-                    pick = dp[ind][tar-coins[ind]];
+                    pick = cur[tar-coins[ind]];
                 }
 
-                dp[ind][tar] = (long long)pick+notPick;
+                cur[tar] = (long long)pick+notPick;
             }
+            prev = cur;
         }
 
-        return dp[n-1][amount];
+        return prev[amount];
     }
 };
 
