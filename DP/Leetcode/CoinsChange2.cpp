@@ -48,7 +48,14 @@ public:
 
         int n = coins.size();
         vector<vector<int>> dp(n, vector<int>(amount+1, -1));
-        return f(n-1, amount, coins, dp);
+        int ans =  f(n-1, amount, coins, dp);
+
+        for(int i=0;i<n;i++){
+            for(int tar=0;tar<=amount;tar++){
+                cout<<dp[i][tar]<<" ";
+            }
+            cout<<endl;
+        }
     }
 };
 
