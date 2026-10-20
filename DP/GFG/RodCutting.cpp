@@ -91,7 +91,7 @@ int main(){
 
     for(int i=0;i<n;i++){
         int num;
-        cout<<"Enter value at index: "<<i+1<<": ";
+        cout<<"Enter value at index: "<<i<<": ";
         cin>>num;
         arr[i] = num;
     }
