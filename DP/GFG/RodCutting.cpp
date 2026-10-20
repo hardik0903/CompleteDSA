@@ -98,5 +98,5 @@ int main(){
 
     Solution sol;
     int ans = sol.cutRod(arr);
-    cout<<endl;
+    cout<<ans<<endl;
 }
