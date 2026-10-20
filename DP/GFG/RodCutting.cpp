@@ -83,10 +83,11 @@ class Solution {
 
 int main(){
     int n;
-    vector<int> arr(n);
 
     cout<<"Enter the number of elements: ";
     cin>>n;
+
+    vector<int> arr(n);
 
     for(int i=0;i<n;i++){
         int num;
