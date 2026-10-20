@@ -54,7 +54,7 @@ class Solution {
     //     return dp[n-1][n];
     // }
     
-    //Space optimization 1
+    //Space optimization 2
     int cutRod(vector<int> &price) {
         // code here
         int n = price.size();
