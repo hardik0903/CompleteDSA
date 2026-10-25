@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// int longestCommonSubsequence(string s1, string s2){
+/// int longestCommonSubsequence(string s1, string s2){
 
 // 	int n = s1.size();
 // 	int m = s2.size();
@@ -25,7 +25,7 @@ using namespace std;
 string findLCS(int n, int m,string &s1, string &s2){
 	// Write your code here.	
 
-	vector<vector<int>> dp(n, vector<int>(m, 0));
+	vector<vector<int>> dp(n+1, vector<int>(m+1, 0));
 
 	for(int i=1;i<=n;i++){
 		for(int j=1;j<=m;j++){
@@ -34,13 +34,13 @@ string findLCS(int n, int m,string &s1, string &s2){
 				dp[i][j] = 1 + dp[i-1][j-1];
 			}
 			else{
-				dp[i-1][j-1] = max(dp[i-1][j], dp[i][j-1]);
+				dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
 			}
 		}
 	}
 
 	int len = dp[n][m];
-	cout<<len<<endl;
+	// cout<<len<<endl;
 
 	string s = "";
 	for(int i=0;i<len;i++) s+='$';
