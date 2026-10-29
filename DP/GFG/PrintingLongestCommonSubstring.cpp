@@ -38,7 +38,8 @@ public:
             }
         }
 
-        string s = s2.substr(index, maxVal);
+        int startIndex = index - maxVal; 
+        string s = s2.substr(startIndex, maxVal);
         return s;
     }
 };
