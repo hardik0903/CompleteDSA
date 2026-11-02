@@ -44,5 +44,5 @@ int main(){
 
     Solution sol;
     int ans = sol.minOperationForPalindrome(s);
-    cout<<endl;
+    cout<<ans<<endl;
 }
