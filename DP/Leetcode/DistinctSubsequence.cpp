@@ -37,4 +37,5 @@ int main(){
 
     Solution sol;
     int ans = sol.numDistinct(s, t);
+    cout<<ans<<endl;
 }
